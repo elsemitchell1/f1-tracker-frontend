@@ -1,0 +1,20 @@
+<nav class="navbar">
+    <div class="navcontainer">
+        <div class="navlogo">
+            <h1 class="gradient-text">F1 Driver Tracker</h1>
+        </div>
+        <div class="navbuttons">
+            <a class="gradient-text" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+            <a class="gradient-text" routerLink="/Dashboard" routerLinkActive="active">Dashboard</a>
+            <a class="gradient-text" routerLink="/Results" routerLinkActive="active">Results</a>
+            <a class="gradient-text" routerLink="/Standings" routerLinkActive="active">Standings</a>
+        </div>
+        <button class="mobile-menu-button" (click)="toggleMobileMenu()">☰</button>
+    </div>
+    <div class="mobile-menu" [ngClass]="{'active': mobileMenuVisible}">
+        <a class="gradient-text" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="toggleMobileMenu()">Home</a>
+        <a class="gradient-text" routerLink="/Dashboard" routerLinkActive="active" (click)="toggleMobileMenu()">Dashboard</a>
+        <a class="gradient-text" routerLink="/Results" routerLinkActive="active" (click)="toggleMobileMenu()">Results</a>
+        <a class="gradient-text" routerLink="/Standings" routerLinkActive="active" (click)="toggleMobileMenu()">Standings</a>
+    </div>
+</nav>
