@@ -10,7 +10,10 @@ export class F1Service {
 
   constructor(private http: HttpClient) { }
   
-  getCurrentStandings(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/current`);
+  getCurrentDriverStandings(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/currentDriver`);
+  }
+  getCurrentConstructorStandings(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/currentConstructor`);
   }
 }
