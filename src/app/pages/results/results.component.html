@@ -1,1 +1,24 @@
-<p>results works!</p>
+<div class="dropdown-container">
+  <label for="race-select">Select a Race:</label>
+  <select id="race-select" [(ngModel)]="selectedRace">
+    <option *ngFor="let r of races" [ngValue]="r">{{ r.raceName }}</option>
+  </select>
+</div>
+
+<div *ngIf="selectedRace" class="results-container">
+  <h2>{{ selectedRace.raceName }}</h2>
+  <table>
+    <tr class="results-row">
+      <th>Pos</th>
+      <th>Driver</th>
+      <th>Team</th>
+      <th>Points</th>
+    </tr>
+    <tr *ngFor="let d of selectedRace.Results" class="results-row">
+      <td>{{ d.position }}</td>
+      <td>{{ d.Driver.givenName }} {{ d.Driver.familyName }}</td>
+      <td>{{ d.Constructor.name }}</td>
+      <td>{{ d.points }}</td>
+    </tr>
+  </table>
+</div>
