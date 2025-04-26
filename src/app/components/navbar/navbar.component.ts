@@ -3,16 +3,16 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+	selector: 'app-navbar',
+	standalone: true,
+	imports: [RouterLink, RouterLinkActive, CommonModule],
+	templateUrl: './navbar.component.html',
+	styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  mobileMenuVisible = false;
+	mobileMenuVisible = false;
 
-  toggleMobileMenu() {
-    this.mobileMenuVisible = !this.mobileMenuVisible;
-  }
+	toggleMobileMenu() {
+		this.mobileMenuVisible = !this.mobileMenuVisible;
+	}
 }

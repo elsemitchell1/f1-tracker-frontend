@@ -1,1 +1,68 @@
-<p>dashboard works!</p>
+<div *ngIf="!isLoggedIn" class="auth-container">
+	<div class="auth-content">
+		<h2>Login</h2>
+		<form (ngSubmit)="login()">
+			<label for="email">Email:</label>
+			<input
+				type="email"
+				id="email"
+				[(ngModel)]="email"
+				name="email"
+				required
+			/>
+			<label for="password">Password:</label>
+			<input
+				type="password"
+				id="password"
+				[(ngModel)]="password"
+				name="password"
+				required
+			/>
+			<button type="submit">Login</button>
+		</form>
+	</div>
+	<div class="auth-content">
+		<h2>Signup</h2>
+		<form (ngSubmit)="signup()">
+			<label for="signupEmail">Email:</label>
+			<input
+				type="email"
+				id="signupEmail"
+				[(ngModel)]="signupEmail"
+				name="signupEmail"
+				required
+			/>
+			<label for="signupPassword">Password:</label>
+			<input
+				type="password"
+				id="signupPassword"
+				[(ngModel)]="signupPassword"
+				name="signupPassword"
+				required
+			/>
+			<button type="submit">Signup</button>
+		</form>
+	</div>
+</div>
+<div *ngIf="isLoggedIn" class="dashboard-container">
+	<h2>Welcome to Your Dashboard {{ userEmail }}</h2>
+	<button (click)="logout()">Logout</button>
+
+	<h3>Your Favorite Drivers</h3>
+	<ul>
+		<li *ngFor="let driver of favoriteDrivers">{{ driver }}</li>
+	</ul>
+
+	<h3>Add a New Driver</h3>
+	<form (ngSubmit)="addFavoriteDriver()">
+		<label for="newDriver">Driver Name:</label>
+		<input
+			type="text"
+			id="newDriver"
+			[(ngModel)]="newDriver"
+			name="newDriver"
+			required
+		/>
+		<button type="submit">Add Driver</button>
+	</form>
+</div>
