@@ -24,6 +24,13 @@
 	<div class="auth-content">
 		<h2>Signup</h2>
 		<form (ngSubmit)="signup()">
+			<label for="signupUsername">Username:</label>
+			<input
+				id="signupUsername"
+				[(ngModel)]="signupUsername"
+				name="signupUsername"
+				required
+			/>
 			<label for="signupEmail">Email:</label>
 			<input
 				type="email"
@@ -45,24 +52,41 @@
 	</div>
 </div>
 <div *ngIf="isLoggedIn" class="dashboard-container">
-	<h2>Welcome to Your Dashboard {{ userEmail }}</h2>
-	<button (click)="logout()">Logout</button>
+	<h2>Welcome to Your Dashboard {{ username }}</h2>
+	<div class="logout-container">
+		<button (click)="logout()" class="logout-button">Logout</button>
+	</div>
 
 	<h3>Your Favorite Drivers</h3>
-	<ul>
-		<li *ngFor="let driver of favoriteDrivers">{{ driver }}</li>
-	</ul>
+	<div class="driver-cards">
+		<div *ngFor="let driver of favoriteDrivers" class="driver-card">
+			<img
+				[src]="getDriverImageUrl(driver)"
+				alt="{{ driver }}"
+				class="driver-image"
+			/>
+			<div class="driver-details">
+				<h3>{{ driver.name }}</h3>
+				<p><strong>Constructor:</strong> {{ driver.constructor }}</p>
+				<p><strong>Points:</strong> {{ driver.points }}</p>
+				<p><strong>Championship Position:</strong> {{ driver.position }}</p>
+				<p><strong>Wins:</strong> {{ driver.wins }}</p>
+			</div>
+			<button (click)="removeFavoriteDriver(driver.name)">Remove</button>
+		</div>
+	</div>
 
 	<h3>Add a New Driver</h3>
 	<form (ngSubmit)="addFavoriteDriver()">
-		<label for="newDriver">Driver Name:</label>
-		<input
-			type="text"
-			id="newDriver"
-			[(ngModel)]="newDriver"
-			name="newDriver"
-			required
-		/>
-		<button type="submit">Add Driver</button>
+		<label for="newDriver">Select Driver:</label>
+		<select id="newDriver" [(ngModel)]="newDriver" name="newDriver" required>
+			<option
+				*ngFor="let driver of driverStandings"
+				[value]="driver.Driver.givenName + ' ' + driver.Driver.familyName"
+			>
+				{{ driver.Driver.givenName }} {{ driver.Driver.familyName }}
+			</option>
+		</select>
+		<button class="addDriverButton" type="submit">Add Driver</button>
 	</form>
 </div>

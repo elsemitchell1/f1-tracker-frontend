@@ -41,12 +41,14 @@ input {
 }
 
 button {
-	padding: 0.5rem 1rem;
 	background-color: #d32f2f;
 	color: white;
 	border: none;
+	margin: 10px;
+	padding: 0.5rem 1rem;
 	border-radius: 5px;
 	cursor: pointer;
+	font-size: 1rem;
 }
 
 button:hover {
@@ -61,4 +63,52 @@ ul {
 li {
 	margin: 0.5rem 0;
 	font-size: 1.2rem;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+.driver-cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1.5rem;
+}
+
+.driver-card {
+	width: 300px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	text-align: center;
+	background-color: #fff;
+}
+
+.driver-image {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+}
+
+.driver-details {
+	padding: 0.1rem;
+}
+
+.logout-container {
+	position: absolute;
+	top: 6rem; // For top-right corner
+	right: 1rem;
+
+	// Uncomment the following lines for bottom-right corner instead:
+	// top: auto;
+	// bottom: 1rem;
+}
+
+.logout-button:hover {
+	background-color: #b71c1c;
+}
+
+button:hover {
+	background-color: #b71c1c;
 }
