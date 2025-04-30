@@ -4,11 +4,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { jwtDecode } from 'jwt-decode';
 import { F1Service } from '../../api/f1.service';
+import {
+	CdkDragDrop,
+	CdkDropList,
+	CdkDrag,
+	moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import { Driver } from '../../models/driverModel';
 
 @Component({
 	selector: 'app-dashboard',
 	standalone: true,
-	imports: [CommonModule, FormsModule],
+	imports: [CommonModule, FormsModule, CdkDropList, CdkDrag],
 	templateUrl: './dashboard.component.html',
 	styleUrl: './dashboard.component.scss',
 })
@@ -21,7 +28,7 @@ export class DashboardComponent {
 	signupUsername = '';
 	signupEmail = '';
 	signupPassword = '';
-	favoriteDrivers: any[] = [];
+	favoriteDrivers: Driver[] = [];
 	driverStandings: any[] = [];
 	newDriver = '';
 	userEmail = '';
@@ -38,6 +45,18 @@ export class DashboardComponent {
 				this.loadFavoriteDrivers();
 			});
 		}
+	}
+
+	drop(event: CdkDragDrop<Driver[]>): void {
+		console.log('Previous Index:', event.previousIndex);
+		console.log('Current Index:', event.currentIndex);
+		console.log('Before Move:', this.favoriteDrivers);
+		moveItemInArray(
+			this.favoriteDrivers,
+			event.previousIndex,
+			event.currentIndex
+		);
+		console.log('After Move:', this.favoriteDrivers);
 	}
 
 	decodeToken(): void {
@@ -99,16 +118,14 @@ export class DashboardComponent {
 						(d) => `${d.Driver.givenName} ${d.Driver.familyName}` === driverName
 					);
 					// Return the matched driver or a placeholder
-					return driver
-						? {
-								name: `${driver.Driver.givenName} ${driver.Driver.familyName}`,
-								familyName: `${driver.Driver.familyName}`,
-								constructor: driver.Constructors[0].name,
-								points: driver.points,
-								wins: driver.wins,
-								position: driver.position,
-						  }
-						: { name: driverName, constructor: 'Unknown', points: 0, wins: 0 };
+					return new Driver(
+						`${driver.Driver.givenName} ${driver.Driver.familyName}`,
+						`${driver.Driver.familyName}`,
+						driver.Constructors[0].name,
+						driver.points,
+						driver.position,
+						driver.wins
+					);
 				});
 			});
 	}

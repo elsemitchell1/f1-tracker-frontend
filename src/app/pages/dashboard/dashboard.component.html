@@ -58,21 +58,29 @@
 	</div>
 
 	<h3>Your Favorite Drivers</h3>
-	<div class="driver-cards">
-		<div *ngFor="let driver of favoriteDrivers" class="driver-card">
-			<img
-				[src]="getDriverImageUrl(driver)"
-				alt="{{ driver }}"
-				class="driver-image"
-			/>
-			<div class="driver-details">
-				<h3>{{ driver.name }}</h3>
-				<p><strong>Constructor:</strong> {{ driver.constructor }}</p>
-				<p><strong>Points:</strong> {{ driver.points }}</p>
-				<p><strong>Championship Position:</strong> {{ driver.position }}</p>
-				<p><strong>Wins:</strong> {{ driver.wins }}</p>
+	<div
+		class="driver-cards"
+		cdkDropList
+		[cdkDropListData]="favoriteDrivers"
+		(cdkDropListDropped)="drop($event)"
+		cdkDropListOrientation="horizontal"
+	>
+		<div *ngFor="let driver of favoriteDrivers" cdkDrag>
+			<div class="driver-card">
+				<img
+					[src]="getDriverImageUrl(driver)"
+					alt="{{ driver.name }}"
+					class="driver-image"
+				/>
+				<div class="driver-details">
+					<h3>{{ driver.name }}</h3>
+					<p><strong>Constructor:</strong> {{ driver.constructorName }}</p>
+					<p><strong>Points:</strong> {{ driver.points }}</p>
+					<p><strong>Championship Position:</strong> {{ driver.position }}</p>
+					<p><strong>Wins:</strong> {{ driver.wins }}</p>
+				</div>
+				<button (click)="removeFavoriteDriver(driver.name)">Remove</button>
 			</div>
-			<button (click)="removeFavoriteDriver(driver.name)">Remove</button>
 		</div>
 	</div>
 
